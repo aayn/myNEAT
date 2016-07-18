@@ -1,6 +1,8 @@
-#include <vector>
 #ifndef _GENE_H_
 #define _GENE_H_
+#include <vector>
+//#include "innovation.h"
+
 
 class Gene;
 class NeuronGene;

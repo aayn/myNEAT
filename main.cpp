@@ -4,10 +4,8 @@
 
 using namespace std;
 
-typedef pair<int, NeuronGene> ng_pair;
-
 int main() {
-  vector<ng_pair> neurons;
+  vector<NeuronGene> neurons;
   vector<LinkGene> links;
 
 

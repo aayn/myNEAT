@@ -1,9 +1,9 @@
 CC=g++
 CFLAGS=-c -Wall -Werror -g
 LDFLAGS=
-SOURCES=gene.cpp helper.cpp xor_ann.cpp
+SOURCES=gene.cpp helper.cpp innovation.cpp genome.cpp innov_test.cpp
 OBJECTS=$(SOURCES:.cpp=.o)
-EXECUTABLE=xor
+EXECUTABLE=innov
 
 all: $(SOURCES) $(EXECUTABLE)
 
