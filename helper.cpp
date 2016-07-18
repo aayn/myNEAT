@@ -1,8 +1,8 @@
 #include "helper.h"
 #include <cmath>
 
-double sigmoid(double t, double beta = 4.9f) {
-  return 1 / exp(-beta * t);
+double sigmoid(double t) {
+  return 1 / exp(-4.9 * t);
 }
 
 double ge1(double v) {

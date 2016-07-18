@@ -12,7 +12,7 @@ int main() {
   vector<LinkGene> links;
 
   NeuronGene in1(0, 0, 1.0f);
-  NeuronGene in2(1, 0, 0.0f);
+  NeuronGene in2(1, 0, 1.0f);
   NeuronGene h1(2, 2, 0.0f);
   NeuronGene h2(3, 2, 0.0f);
   NeuronGene o1(4, 1, 0.0f);
@@ -50,7 +50,6 @@ int main() {
   neurons.push_back(o1);
 
   sort(neurons.begin(), neurons.end());
-  //cout << h1.incoming_links.size() << endl;
 
   for (vector<NeuronGene>::iterator i = neurons.begin(); i != neurons.end();
        ++i)
