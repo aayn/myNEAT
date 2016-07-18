@@ -2,21 +2,21 @@
 #include <vector>
 #include <cstddef>
 
-Gene::Gene(): innovation_num(-1) {}
+Gene::Gene(int x): id(x) {}
 
 int Gene::get_innovation_num() {
   return this->innovation_num;
 }
 
-LinkGene::LinkGene(): id(-1), from(-1), to(-1), enabled(false),
-                      recurrent(false), weight(1.0f) {}
-LinkGene::LinkGene(int lid, int from_neuron, int to_neuron, bool en, bool rec,
-                   double w): id(lid), from(from_neuron), to(to_neuron),
-                   enabled(en), recurrent(rec), weight(w) {}
-
-int LinkGene::get_id() {
+int Gene::get_id() {
    return this->id;
 }
+
+LinkGene::LinkGene(): Gene(-1), from(-1), to(-1), enabled(false),
+                      recurrent(false), weight(1.0f) {}
+LinkGene::LinkGene(int lid, int from_neuron, int to_neuron, bool en, bool rec,
+                   double w): Gene(lid), from(from_neuron), to(to_neuron),
+                   enabled(en), recurrent(rec), weight(w) {}
 
 bool LinkGene::is_enabled() {
   return this->enabled;
@@ -42,16 +42,12 @@ int LinkGene::get_from_gene() {
   return this->from;
 }
 
-NeuronGene::NeuronGene(): id(-1), type(-1) {}
-NeuronGene::NeuronGene(int uid, int t, double act): id(uid), type(t),
+NeuronGene::NeuronGene(): Gene(-1), type(-1) {}
+NeuronGene::NeuronGene(int uid, int t, double act): Gene(uid), type(t),
                       activation_response(act) {}
 
 int NeuronGene::get_type() {
   return this->type;
-}
-
-int NeuronGene::get_id() {
-  return this->id;
 }
 
 void NeuronGene::add_incoming_link(int link) {
