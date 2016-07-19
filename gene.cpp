@@ -42,9 +42,13 @@ int LinkGene::get_from_gene() {
   return this->from;
 }
 
+int LinkGene::get_to_gene() {
+  return this->to;
+}
+
 NeuronGene::NeuronGene(): Gene(-1), type(-1) {}
-NeuronGene::NeuronGene(int uid, int t, double act): Gene(uid), type(t),
-                      activation_response(act) {}
+NeuronGene::NeuronGene(int uid, int t, double x, double y):
+                       Gene(uid), type(t), pos_x(x), pos_y(y) {}
 
 int NeuronGene::get_type() {
   return this->type;
@@ -53,11 +57,19 @@ int NeuronGene::get_type() {
 void NeuronGene::add_incoming_link(int link) {
   this->incoming_links.push_back(link);
 }
-
+/*
 double NeuronGene::get_activation() {
   return this->activation_response;
 }
 
 void NeuronGene::set_activation(double v) {
   this->activation_response = v;
+}
+*/
+double NeuronGene::get_pos_y() {
+  return this->pos_y;
+}
+
+double NeuronGene::get_pos_x() {
+  return this->pos_x;
 }

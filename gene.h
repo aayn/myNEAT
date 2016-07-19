@@ -22,16 +22,20 @@ public:
 };
 
 class NeuronGene: public Gene {
-  int type; // -1 - none, 0 - input, 1 - output, 2 - hidden, 3 - bias
-  double activation_response;
+  int type; // -1 - none, 0 - input, 1 - output, 2 - hidden
+  //double activation_response;
+  double pos_x, pos_y; // between 0 and 1 both inclusive
 public:
   std::vector<int> incoming_links;
+  std::vector<int> incoming_neurons;
   NeuronGene();
-  NeuronGene(int, int, double);
+  NeuronGene(int, int, double, double);
   int get_type();
   void add_incoming_link(int);
-  double get_activation();
-  void set_activation(double);
+  //double get_activation();
+  //void set_activation(double);
+  double get_pos_x();
+  double get_pos_y();
 };
 
 class LinkGene: public Gene {
@@ -47,6 +51,7 @@ public:
   void disable();
   double get_weight();
   int get_from_gene();
+  int get_to_gene();
 };
 
 #endif

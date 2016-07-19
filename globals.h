@@ -3,5 +3,6 @@
 
 extern double ADD_LINK_PROB, ADD_NEURON_PROB, PERTURB_WEIGHT_PROB,
               ALTER_RESPONSE_PROB;
+extern int 
 
 #endif
