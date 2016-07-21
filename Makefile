@@ -1,9 +1,9 @@
 CC=g++
 CFLAGS=-c -Wall -Werror -g
 LDFLAGS=
-SOURCES=gene.cpp helper.cpp innovation.cpp genome.cpp innov_test.cpp
+SOURCES=gene.cpp helper.cpp innovation.cpp genome.cpp genome_test.cpp
 OBJECTS=$(SOURCES:.cpp=.o)
-EXECUTABLE=innov
+EXECUTABLE=geno_test
 
 all: $(SOURCES) $(EXECUTABLE)
 

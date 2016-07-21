@@ -4,5 +4,6 @@
 double sigmoid(double);
 double ge1(double);
 double rand_no(double, double);
+bool check_if_integral(double);
 
 #endif

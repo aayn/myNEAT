@@ -16,3 +16,7 @@ double rand_no(double start, double end) {
   return start + static_cast<double>(rand()) / (static_cast<double> (RAND_MAX /
                                                 (end - start)));
 }
+
+bool check_if_integral(double d) {
+  return static_cast<double> (static_cast<int> (d)) == d;
+}

@@ -10,10 +10,10 @@ class LinkGene;
 
 class Gene {
 protected:
-  int innovation_num, id;
+  int innovation, id;
 public:
   Gene(int);
-  int get_innovation_num();
+  int get_innovation();
   int get_id();
 
   bool operator < (const Gene &n) const {
@@ -22,7 +22,8 @@ public:
 };
 
 class NeuronGene: public Gene {
-  int type; // -1 - none, 0 - input, 1 - output, 2 - hidden
+  int type, depth;
+  char t[10];  // -1 - none, 0 - input, 1 - output, 2 - hidden
   //double activation_response;
   double pos_x, pos_y; // between 0 and 1 both inclusive
 public:
@@ -31,11 +32,13 @@ public:
   NeuronGene();
   NeuronGene(int, int, double, double);
   int get_type();
+  char* get_type_str();
   void add_incoming_link(int);
   //double get_activation();
   //void set_activation(double);
   double get_pos_x();
   double get_pos_y();
+  int get_depth();
 };
 
 class LinkGene: public Gene {

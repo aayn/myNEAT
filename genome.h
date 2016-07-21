@@ -14,6 +14,7 @@ public:
   vector<LinkGene> links;
   vector<NeuronGene> neurons;
   Genome(int);
+  void print_genome();
   void add_link(int, int, bool, bool);
   void add_link(int, int, bool, bool, double);
   void add_neuron(int, double, double);

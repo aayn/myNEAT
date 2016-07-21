@@ -1,7 +1,9 @@
 #include "gene.h"
 #include "genome.h"
 #include "helper.h"
+#include <iostream>
 #include <algorithm>
+#include <vector>
 #include <cstdio>
 #include <cmath>
 
@@ -9,6 +11,30 @@ using namespace std;
 
 Genome::Genome(int x): genome_id(x), prev_link_id(-1), prev_neuron_id(-1),
                        in_count(0), out_count(0) {}
+
+void Genome::print_genome(){
+  for(vector<NeuronGene>::iterator n = neurons.begin(); n != neurons.end(); ++n)
+  {
+    printf("Neuron %d(%d), type: %s\n", n->get_id(),n->get_depth(),
+                                        n->get_type_str());
+
+    for(vector<int>::iterator i = n->incoming_links.begin();
+        i != n->incoming_links.end(); ++i)
+    {
+      if(this->links[*i].is_enabled()) {
+        printf("%d ----%d---> %d\n", this->links[*i].get_from_gene(),
+                                     this->links[*i].get_id(),
+                                     this->links[*i].get_to_gene());
+      }
+      else {
+        printf("**%d ----%d---> %d**\n", this->links[*i].get_from_gene(),
+                                     this->links[*i].get_id(),
+                                     this->links[*i].get_to_gene());
+      }
+    }
+    printf("\n");
+  }
+}
 
 void Genome::add_link(int from, int to, bool en, bool rec) {
   int new_id = 1 + (this->prev_link_id++);
@@ -40,8 +66,14 @@ void Genome::mutate_add_link() {
     return;
   }
   int from = rand() % prev_neuron_id;
+
+  if(neurons[from].get_type() == 1) {
+    printf("Can't have a link from output neuron %d\n", from);
+    return;
+  }
+
   if(find(this->neurons[to].incoming_neurons.begin(),
-          this->neurons[to].incoming_neurons.end(), from) ==
+          this->neurons[to].incoming_neurons.end(), from) !=
      this->neurons[to].incoming_neurons.end()) {
           printf("Link from %d to %d already exists.\n", from, to);
           return;
@@ -62,12 +94,14 @@ void Genome::mutate_add_neuron() {
   links[mut_link].disable();
   int from = links[mut_link].get_from_gene(),
       to = links[mut_link].get_to_gene();
+
   double new_x = (neurons[from].get_pos_x() + neurons[to].get_pos_x()) / 2,
          new_y = (neurons[from].get_pos_y() + neurons[to].get_pos_y()) / 2;
 
   this->add_neuron(2, new_x, new_y);
+  //cout << prev_neuron_id << endl;
   //bool rec = (links[from].get_pos_y() >= links[prev_link_id].get_pos_y());
-  this->add_link(from, prev_link_id, true, false);
+  this->add_link(from, prev_neuron_id, true, false);
   //bool rec = (links[prev_link_id].get_pos_y() >= links[to].get_pos_y());
-  this->add_link(prev_link_id, to, true, false);
+  this->add_link(prev_neuron_id, to, true, false);
 }

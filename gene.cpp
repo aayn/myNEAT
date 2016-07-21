@@ -1,11 +1,13 @@
 #include "gene.h"
+#include "helper.h"
 #include <vector>
 #include <cstddef>
+#include <cstring>
 
 Gene::Gene(int x): id(x) {}
 
-int Gene::get_innovation_num() {
-  return this->innovation_num;
+int Gene::get_innovation() {
+  return this->innovation;
 }
 
 int Gene::get_id() {
@@ -54,6 +56,16 @@ int NeuronGene::get_type() {
   return this->type;
 }
 
+char* NeuronGene::get_type_str() {
+  switch (this->type) {
+    case -1: strcpy(t, "none"); break;
+    case 0: strcpy(t, "input"); break;
+    case 1: strcpy(t, "output"); break;
+    case 2: strcpy(t, "hidden"); break;
+  }
+  return t;
+}
+
 void NeuronGene::add_incoming_link(int link) {
   this->incoming_links.push_back(link);
 }
@@ -72,4 +84,16 @@ double NeuronGene::get_pos_y() {
 
 double NeuronGene::get_pos_x() {
   return this->pos_x;
+}
+
+int NeuronGene::get_depth() {
+  double t = this->pos_y;
+  this->depth = 0;
+  while(true) {
+    if(check_if_integral(t))
+      break;
+    t *= 2;
+    this->depth++;
+  }
+  return this->depth;
 }
