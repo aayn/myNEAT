@@ -4,7 +4,7 @@
 #include <cstddef>
 #include <cstring>
 
-Gene::Gene(int x): id(x) {}
+Gene::Gene(int x, int i, int f, int t): id(x), innovation(i), from(f), to(t) {}
 
 int Gene::get_innovation() {
   return this->innovation;
@@ -14,10 +14,19 @@ int Gene::get_id() {
    return this->id;
 }
 
-LinkGene::LinkGene(): Gene(-1), from(-1), to(-1), enabled(false),
-                      recurrent(false), weight(1.0f) {}
-LinkGene::LinkGene(int lid, int from_neuron, int to_neuron, bool en, bool rec,
-                   double w): Gene(lid), from(from_neuron), to(to_neuron),
+int Gene::get_from_neuron() {
+  return this->from;
+}
+
+int Gene::get_to_neuron() {
+  return this->to;
+}
+
+LinkGene::LinkGene(): Gene(-1, -1, -1, -1), enabled(false), recurrent(false),
+                      weight(1.0f) {}
+
+LinkGene::LinkGene(int lid, int ino, int from_neuron, int to_neuron, bool en,
+                   bool rec,double w): Gene(lid, ino, from_neuron, to_neuron),
                    enabled(en), recurrent(rec), weight(w) {}
 
 bool LinkGene::is_enabled() {
@@ -40,17 +49,10 @@ double LinkGene::get_weight() {
   return this->weight;
 }
 
-int LinkGene::get_from_gene() {
-  return this->from;
-}
-
-int LinkGene::get_to_gene() {
-  return this->to;
-}
-
-NeuronGene::NeuronGene(): Gene(-1), type(-1) {}
-NeuronGene::NeuronGene(int uid, int t, double x, double y):
-                       Gene(uid), type(t), pos_x(x), pos_y(y) {}
+NeuronGene::NeuronGene(): Gene(-1, -1, -1, -1), type(-1) {}
+NeuronGene::NeuronGene(int uid, int ino, int from, int to, int t, double x,
+                       double y): Gene(uid, ino, from, to), type(t), pos_x(x),
+                                  pos_y(y) {}
 
 int NeuronGene::get_type() {
   return this->type;
@@ -74,6 +76,7 @@ double NeuronGene::get_activation() {
   return this->activation_response;
 }
 
+if(check_if_integral(t))
 void NeuronGene::set_activation(double v) {
   this->activation_response = v;
 }
@@ -90,7 +93,6 @@ int NeuronGene::get_depth() {
   double t = this->pos_y;
   this->depth = 0;
   while(true) {
-    if(check_if_integral(t))
       break;
     t *= 2;
     this->depth++;

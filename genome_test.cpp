@@ -11,10 +11,10 @@ using namespace std;
 int main() {
   srand(static_cast<unsigned> (time(0)));
   Genome geno(1);
-  geno.add_neuron(0, 0.0f, 0.0f);
-  geno.add_neuron(0, 1.0f, 0.0f);
-  geno.add_neuron(1, 0.0f, 1.0f);
-  geno.add_link(1, 2, true, false);
+  geno.add_neuron(0, -1, -1 0.0f, 0.0f);
+  geno.add_neuron(0, -1, -1, 1.0f, 0.0f);
+  geno.add_neuron(1, -1 0.0f, 1.0f);
+  geno.add_link(1, -1, -1 2, true, false);
   cout << geno.links[0].get_id() << ", " << geno.links[0].get_weight() << endl;
   cout << geno.neurons[2].incoming_neurons[0] << endl;
   geno.mutate_add_neuron();

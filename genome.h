@@ -17,7 +17,8 @@ public:
   void print_genome();
   void add_link(int, int, bool, bool);
   void add_link(int, int, bool, bool, double);
-  void add_neuron(int, double, double);
+  void add_neuron(int, int, int, double, double);
+  void add_init_neuron(int, double, double);
 
   void mutate_add_link();
   void mutate_add_neuron();

@@ -10,11 +10,14 @@ class LinkGene;
 
 class Gene {
 protected:
-  int innovation, id;
+  int id, innovation;
+  int from, to;
 public:
-  Gene(int);
+  Gene(int, int, int, int);
   int get_innovation();
   int get_id();
+  int get_from_neuron();
+  int get_to_neuron();
 
   bool operator < (const Gene &n) const {
     return (id < n.id);
@@ -30,7 +33,7 @@ public:
   std::vector<int> incoming_links;
   std::vector<int> incoming_neurons;
   NeuronGene();
-  NeuronGene(int, int, double, double);
+  NeuronGene(int, int, int, int, int, double, double);
   int get_type();
   char* get_type_str();
   void add_incoming_link(int);
@@ -42,19 +45,16 @@ public:
 };
 
 class LinkGene: public Gene {
-  int from, to;
   bool enabled, recurrent;
   double weight;
 public:
   LinkGene();
-  LinkGene(int, int, int, bool, bool, double);
+  LinkGene(int, int, int, int, bool, bool, double);
   bool is_enabled();
   bool is_recurrent();
   void enable();
   void disable();
   double get_weight();
-  int get_from_gene();
-  int get_to_gene();
 };
 
 #endif
