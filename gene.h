@@ -6,7 +6,7 @@
 
 class Gene;
 class NeuronGene;
-class LinkGene;
+class AxonGene;
 
 class Gene {
 protected:
@@ -30,13 +30,13 @@ class NeuronGene: public Gene {
   //double activation_response;
   double pos_x, pos_y; // between 0 and 1 both inclusive
 public:
-  std::vector<int> incoming_links;
+  std::vector<int> incoming_axons;
   std::vector<int> incoming_neurons;
   NeuronGene();
   NeuronGene(int, int, int, int, int, double, double);
   int get_type();
   char* get_type_str();
-  void add_incoming_link(int);
+  void add_incoming_axon(int);
   //double get_activation();
   //void set_activation(double);
   double get_pos_x();
@@ -44,12 +44,12 @@ public:
   int get_depth();
 };
 
-class LinkGene: public Gene {
+class AxonGene: public Gene {
   bool enabled, recurrent;
   double weight;
 public:
-  LinkGene();
-  LinkGene(int, int, int, int, bool, bool, double);
+  AxonGene();
+  AxonGene(int, int, int, int, bool, bool, double);
   bool is_enabled();
   bool is_recurrent();
   void enable();

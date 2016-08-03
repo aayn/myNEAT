@@ -22,30 +22,30 @@ int Gene::get_to_neuron() {
   return this->to;
 }
 
-LinkGene::LinkGene(): Gene(-1, -1, -1, -1), enabled(false), recurrent(false),
+AxonGene::AxonGene(): Gene(-1, -1, -1, -1), enabled(false), recurrent(false),
                       weight(1.0f) {}
 
-LinkGene::LinkGene(int lid, int ino, int from_neuron, int to_neuron, bool en,
+AxonGene::AxonGene(int lid, int ino, int from_neuron, int to_neuron, bool en,
                    bool rec,double w): Gene(lid, ino, from_neuron, to_neuron),
                    enabled(en), recurrent(rec), weight(w) {}
 
-bool LinkGene::is_enabled() {
+bool AxonGene::is_enabled() {
   return this->enabled;
 }
 
-bool LinkGene::is_recurrent() {
+bool AxonGene::is_recurrent() {
   return this->recurrent;
 }
 
-void LinkGene::enable() {
+void AxonGene::enable() {
   this->enabled = true;
 }
 
-void LinkGene::disable() {
+void AxonGene::disable() {
   this->enabled = false;
 }
 
-double LinkGene::get_weight() {
+double AxonGene::get_weight() {
   return this->weight;
 }
 
@@ -68,8 +68,8 @@ char* NeuronGene::get_type_str() {
   return t;
 }
 
-void NeuronGene::add_incoming_link(int link) {
-  this->incoming_links.push_back(link);
+void NeuronGene::add_incoming_axon(int axon) {
+  this->incoming_axons.push_back(axon);
 }
 /*
 double NeuronGene::get_activation() {

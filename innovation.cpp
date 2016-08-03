@@ -1,9 +1,9 @@
 #include "innovation.h"
 #include "globals.h"
 
-Innovation::Innovation(): cur_neuron_inov(5 + 1), cur_link_inov(MAX_NEURONS + 1) {}
+Innovation::Innovation(): cur_neuron_inov(5 + 1), cur_axon_inov(MAX_NEURONS + 1) {}
 
-int Innovation::inov_exists(int fi, int ti, int type) {// type: neuron(1) link(-1)
+int Innovation::inov_exists(int fi, int ti, int type) {// type: neuron(1) axon(-1)
   if(fi == -1 && ti == -1)
     return 0;
   NKey ipair = {fi, ti, type};
@@ -25,9 +25,9 @@ int Innovation::assign_innovation(int fi, int ti, int type) {
     }
     else {
       if(fi != -1)
-        idata[ipair] = cur_link_inov + MAX_NEURONS;
-      cur_link_inov++;
-      return cur_link_inov - 1 + MAX_NEURONS;
+        idata[ipair] = cur_axon_inov + MAX_NEURONS;
+      cur_axon_inov++;
+      return cur_axon_inov - 1 + MAX_NEURONS;
     }
   }
   return atemp;

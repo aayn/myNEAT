@@ -9,7 +9,7 @@ using namespace std;
 
 int main() {
   vector<NeuronGene> neurons;
-  vector<LinkGene> links;
+  vector<AxonGene> axons;
 
   NeuronGene in1(0, 0, 1.0f);
   NeuronGene in2(1, 0, 1.0f);
@@ -17,31 +17,31 @@ int main() {
   NeuronGene h2(3, 2, 0.0f);
   NeuronGene o1(4, 1, 0.0f);
 
-  LinkGene l02(0, 0, 2, true, false, 0.5f);
-  links.push_back(l02);
-  h1.add_incoming_link(0);
+  AxonGene l02(0, 0, 2, true, false, 0.5f);
+  axons.push_back(l02);
+  h1.add_incoming_axon(0);
 
-  LinkGene l03(1, 0, 3, true, false, 1.0f);
-  links.push_back(l03);
-  h2.add_incoming_link(1);
+  AxonGene l03(1, 0, 3, true, false, 1.0f);
+  axons.push_back(l03);
+  h2.add_incoming_axon(1);
 
-  LinkGene l12(2, 1, 1, true, false, 0.5f);
-  links.push_back(l12);
-  h1.add_incoming_link(2);
+  AxonGene l12(2, 1, 1, true, false, 0.5f);
+  axons.push_back(l12);
+  h1.add_incoming_axon(2);
 
-  LinkGene l13(3, 1, 3, true, false, 1.0f);
-  links.push_back(l13);
-  h2.add_incoming_link(3);
+  AxonGene l13(3, 1, 3, true, false, 1.0f);
+  axons.push_back(l13);
+  h2.add_incoming_axon(3);
 
-  LinkGene l24(4, 2, 4, true, false, -2.0f);
-  links.push_back(l24);
-  o1.add_incoming_link(4);
+  AxonGene l24(4, 2, 4, true, false, -2.0f);
+  axons.push_back(l24);
+  o1.add_incoming_axon(4);
 
-  LinkGene l34(5, 3, 4, true, false, 1.0f);
-  links.push_back(l34);
-  o1.add_incoming_link(5);
+  AxonGene l34(5, 3, 4, true, false, 1.0f);
+  axons.push_back(l34);
+  o1.add_incoming_axon(5);
 
-  sort(links.begin(), links.end());
+  sort(axons.begin(), axons.end());
 
   neurons.push_back(in1);
   neurons.push_back(in2);
@@ -58,10 +58,10 @@ int main() {
       continue;
     double sum = 0, tw = 0, in_val = 0;
     int from_n = 0;
-    for (vector<int>::iterator j = i->incoming_links.begin();
-         j != i->incoming_links.end(); ++j) {
-           tw = links[*j].get_weight();
-           from_n = links[*j].get_from_gene();
+    for (vector<int>::iterator j = i->incoming_axons.begin();
+         j != i->incoming_axons.end(); ++j) {
+           tw = axons[*j].get_weight();
+           from_n = axons[*j].get_from_gene();
            in_val = neurons[from_n].get_activation();
            sum += in_val * tw;
     }

@@ -9,9 +9,9 @@
 using namespace std;
 
 class Innovation {
-  //Neuron innnovation number will start from 1 to say 10^7. Link innovation no.
+  //Neuron innnovation number will start from 1 to say 10^7. Axon innovation no.
   //will start from 10^7 + 1 to MAX_INT
-  int cur_neuron_inov, cur_link_inov, itemp, atemp;
+  int cur_neuron_inov, cur_axon_inov, itemp, atemp;
   unordered_map<NKey, int, NKeyHasher> idata; // neurons from and to which the
                                              //new innovation is
 public:
