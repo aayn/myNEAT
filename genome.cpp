@@ -17,12 +17,21 @@ Genome::Genome(int x): genome_id(x), prev_axon_id(-1), prev_neuron_id(-1),
 void Genome::print_genome(){
   for(vector<NeuronGene>::iterator n = neurons.begin(); n != neurons.end(); ++n)
   {
-    int ttf = n->get_from_neuron();
-    int ttt = n->get_to_neuron();
+    int ttf = n->get_from_neuron(), ttfi;
+    int ttt = n->get_to_neuron(), ttti;
+    if(ttf == -1)
+      ttfi = 0;
+    else
+      ttfi = this->neurons[ttf].get_innovation();
+
+      if(ttt == -1)
+        ttti = 0;
+      else
+        ttti = this->neurons[ttt].get_innovation();
+
     printf("Neuron %d(dY:%lf), type: %s, from: %d(%d), to: %d(%d), innovation: %d\n",
-            n->get_id(), n->get_pos_y(), n->get_type_str(), ttf,
-            this->neurons[ttf].get_innovation(), ttt,
-            this->neurons[ttt].get_innovation(), n->get_innovation());
+            n->get_id(), n->get_pos_y(), n->get_type_str(), ttf, ttfi,
+            ttt, ttti, n->get_innovation());
 
     for(vector<int>::iterator i = n->incoming_axons.begin();
         i != n->incoming_axons.end(); ++i)
