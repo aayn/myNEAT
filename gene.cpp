@@ -22,33 +22,6 @@ int Gene::get_to_neuron() {
   return this->to;
 }
 
-AxonGene::AxonGene(): Gene(-1, -1, -1, -1), enabled(false), recurrent(false),
-                      weight(1.0f) {}
-
-AxonGene::AxonGene(int lid, int ino, int from_neuron, int to_neuron, bool en,
-                   bool rec,double w): Gene(lid, ino, from_neuron, to_neuron),
-                   enabled(en), recurrent(rec), weight(w) {}
-
-bool AxonGene::is_enabled() {
-  return this->enabled;
-}
-
-bool AxonGene::is_recurrent() {
-  return this->recurrent;
-}
-
-void AxonGene::enable() {
-  this->enabled = true;
-}
-
-void AxonGene::disable() {
-  this->enabled = false;
-}
-
-double AxonGene::get_weight() {
-  return this->weight;
-}
-
 NeuronGene::NeuronGene(): Gene(-1, -1, -1, -1), type(-1) {}
 NeuronGene::NeuronGene(int uid, int ino, int from, int to, int t, double x,
                        double y): Gene(uid, ino, from, to), type(t), pos_x(x),
@@ -98,4 +71,31 @@ int NeuronGene::get_depth() {
     this->depth++;
   }
   return this->depth;
+}
+
+AxonGene::AxonGene(): Gene(-1, -1, -1, -1), enabled(false), recurrent(false),
+                      weight(1.0f) {}
+
+AxonGene::AxonGene(int lid, int ino, int from_neuron, int to_neuron, bool en,
+                   bool rec,double w): Gene(lid, ino, from_neuron, to_neuron),
+                   enabled(en), recurrent(rec), weight(w) {}
+
+bool AxonGene::is_enabled() {
+  return this->enabled;
+}
+
+bool AxonGene::is_recurrent() {
+  return this->recurrent;
+}
+
+void AxonGene::enable() {
+  this->enabled = true;
+}
+
+void AxonGene::disable() {
+  this->enabled = false;
+}
+
+double AxonGene::get_weight() {
+  return this->weight;
 }
