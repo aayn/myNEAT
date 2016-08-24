@@ -20,7 +20,7 @@ public:
   int get_to_neuron();
 
   bool operator < (const Gene &n) const {
-    return (id < n.id);
+    return (innovation < n.innovation);
   }
 };
 

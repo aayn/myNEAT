@@ -3,8 +3,14 @@
 #include "innovation.h"
 
 class Organism {
-  vector<Genome> genomes;
 public:
-  double compat_score(genome, genome);
-  genome crossover(genome, genome);
+  vector<Genome> genomes;
+  double compat_score(Genome, Genome);
+  void init_pop(int);
+
+  //Genome operator[](int i) const {
+  //  return this->genomes[i];
+  //}
 };
+
+Genome crossover(Genome, Genome);

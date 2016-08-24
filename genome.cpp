@@ -11,8 +11,9 @@
 using namespace std;
 Innovation idatabase;
 
-Genome::Genome(int x): genome_id(x), prev_axon_id(-1), prev_neuron_id(-1),
-                       in_count(0), out_count(0) {}
+//for now, set fitness to a random no
+Genome::Genome(): genome_id(0), prev_axon_id(-1), prev_neuron_id(-1),
+                       in_count(0), out_count(0), fitness(rand_no(0, 100)) {}
 
 void Genome::print_genome(){
   for(vector<NeuronGene>::iterator n = neurons.begin(); n != neurons.end(); ++n)
@@ -69,6 +70,15 @@ void Genome::add_axon(int from, int to, bool en, bool rec) {
   this->neurons[to].incoming_neurons.push_back(from);
 }
 
+void Genome::add_axon(int from, int to, bool en, bool rec, int inov) {
+  int new_id = 1 + (this->prev_axon_id++);
+  double w = rand_no(0, 1);
+  AxonGene newAxon(new_id, inov, from, to, en, rec, w);
+  this->axons.push_back(newAxon);
+  this->neurons[to].incoming_axons.push_back(new_id);
+  this->neurons[to].incoming_neurons.push_back(from);
+}
+
 void Genome::add_axon(int from, int to, bool en, bool rec, double w) {
   int new_id = 1 + (this->prev_axon_id++);
   int fi = neurons[from].get_innovation();
@@ -85,6 +95,13 @@ void Genome::add_neuron(int type, int from, int to, double x, double y) {
   int fi = neurons[from].get_innovation();
   int ti = neurons[to].get_innovation();
   int inov = idatabase.assign_innovation(fi, ti, 1);
+  NeuronGene newNeuron(new_id, inov, from, to, type, x, y);
+  this->neurons.push_back(newNeuron);
+}
+
+void Genome::add_neuron(int type, int from, int to, double x, double y,
+                        int inov) {
+  int new_id = 1 + (this->prev_neuron_id++);
   NeuronGene newNeuron(new_id, inov, from, to, type, x, y);
   this->neurons.push_back(newNeuron);
 }
@@ -146,4 +163,12 @@ void Genome::mutate_add_neuron() {
   this->add_axon(from, prev_neuron_id, true, false);
   //bool rec = (axons[prev_axon_id].get_pos_y() >= axons[to].get_pos_y());
   this->add_axon(prev_neuron_id, to, true, false);
+}
+
+double Genome::get_fitness() {
+  return this->fitness;
+}
+
+void Genome::set_fitness(double fit) {
+  this->fitness = fit;
 }
